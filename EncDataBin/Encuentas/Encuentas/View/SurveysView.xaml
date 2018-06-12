@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Encuentas.SurveysView"
+             xmlns:local="clr-namespace:Encuentas"
+             Title="Encuestas"
+             BindingContext="{Binding Main, Source={StaticResource localizador}}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!--<local:Data x:Key="data"/>-->
+            <local:EquipoFavoritoConverter x:Key="equipoConv"/>
+            <DataTemplate x:Key="EncuestasDataTemplate">
+                <ViewCell>
+                    <StackLayout>
+                        <Label Text="{Binding Nombre}"
+                               FontSize="24"
+                               TextColor="White"/>
+                        <Label Text="{Binding FechaNacimiento,StringFormat='{}{0:dd/MM/yyyy}'}"
+                               TextColor="White"/>
+                        <Label Text="{Binding FavoriteTeam}"
+                               TextColor="{Binding FavoriteTeam,Converter={StaticResource equipoConv }}"/>
+                        <Label Text="{Binding Longitud,StringFormat='{}{0:N4}'}"
+                               TextColor="White"/>
+                        <Label Text="{Binding Latitud,StringFormat='{}{0:N4}'}"
+                               TextColor="White"/>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid Margin="10"
+              BindingContext="{Binding ListaEncuestas}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                
+            </Grid.RowDefinitions>
+            <Button Text="+"
+                    Command="{Binding NuevaEncCommand}"
+                    Style="{StaticResource BotonPal}"
+                    >
+                
+            </Button>
+            <ListView ItemsSource="{Binding Encuestas}"
+                      SelectedItem="{Binding EncSeleccionada,Mode=TwoWay}"
+                      ItemTemplate="{StaticResource EncuestasDataTemplate }"
+                      Grid.Row="1"
+                      HasUnevenRows="True" 
+                      BackgroundColor="Black">
+                
+            </ListView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

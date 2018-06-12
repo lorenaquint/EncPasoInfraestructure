@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Encuentas.SurveyDetailsView"
+             Title="Nueva Encuesta"
+             BindingContext="{Binding Main, Source={StaticResource localizador}}">
+    <ContentPage.Content>
+        <Grid Margin="10"
+              BindingContext="{Binding NewEncuesta}">
+            <Grid.RowDefinitions>
+                <RowDefinition ></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackLayout>
+                <Label Text="Nombre"/>
+                <Entry x:Name="NombreEntry"
+                       Text="{Binding Nombre, Mode=TwoWay}"/>
+                <Label Text="Fecha de Nacimiento"/>
+                <DatePicker x:Name="FechaNacimientoDP"
+                            Date="{Binding FechaNacimiento, Mode=TwoWay}"/>
+                <Label Text="{Binding EquipoFavorito, Mode=TwoWay}"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label x:Name="EquipoFavoritoLAbel"/>
+                    <Button Grid.Column="1"
+                            Command="{Binding AgregarEquipoCommand}"
+                            Style="{StaticResource BotonPal}"
+                            />
+                </Grid>
+            </StackLayout>
+            <Button Grid.Row="1"
+                    Command="{Binding GuardarEncuestaCommand}"
+                    Text="Aceptar"
+                    />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
